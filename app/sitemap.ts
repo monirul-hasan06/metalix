@@ -1,3 +1,24 @@
 import type { MetadataRoute } from "next";
 import { products } from "@/data/products";
-export default function sitemap(): MetadataRoute.Sitemap { const base = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"; const routes = ["", "/shop", "/about", "/contact"].map(route => ({ url: `${base}${route}`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: route === "" ? 1 : .8 })); return [...routes, ...products.map(product => ({ url: `${base}/product/${product.slug}`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: .7 }))]; }
+import { getSiteUrl } from "@/lib/site-url";
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const baseUrl = getSiteUrl();
+  const now = new Date();
+
+  const routes: MetadataRoute.Sitemap = [
+    { url: baseUrl, lastModified: now, changeFrequency: "weekly", priority: 1 },
+    { url: `${baseUrl}/shop`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${baseUrl}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+  ];
+
+  const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
+    url: `${baseUrl}/product/${product.slug}`,
+    lastModified: now,
+    changeFrequency: "weekly",
+    priority: 0.8,
+  }));
+
+  return [...routes, ...productRoutes];
+}
