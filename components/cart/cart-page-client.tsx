@@ -1,0 +1,16 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, ShoppingBag, Trash2 } from "lucide-react";
+import { formatPrice } from "@/lib/currency";
+import { useCartStore } from "@/store/cart-store";
+import { QuantitySelector } from "@/components/ui/quantity-selector";
+
+export function CartPageClient() {
+  const { items, removeItem, updateQuantity } = useCartStore();
+  const subtotal = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+  const delivery = subtotal >= 2500 || subtotal === 0 ? 0 : 120;
+  if (!items.length) return <div className="rounded-[2rem] border border-dashed border-white/10 py-24 text-center"><span className="mx-auto mb-5 grid size-16 place-items-center rounded-full bg-white/5 text-white/30"><ShoppingBag /></span><h2 className="text-2xl font-bold">Your cart is empty</h2><p className="mt-2 text-white/42">Add a few strong essentials to get started.</p><Link href="/shop" className="mt-7 inline-flex rounded-full bg-[var(--accent)] px-7 py-3.5 font-bold text-black">Shop now</Link></div>;
+  return <div className="grid gap-10 lg:grid-cols-[1fr_380px]"><div className="space-y-4">{items.map(item => <div key={item.id} className="flex gap-4 rounded-[1.5rem] border border-white/8 bg-white/[.025] p-4 sm:gap-6 sm:p-5"><div className="relative h-32 w-24 shrink-0 overflow-hidden rounded-2xl bg-white/5 sm:h-40 sm:w-32"><Image src={item.product.image} alt={item.product.name} fill className="object-cover" sizes="128px" /></div><div className="flex min-w-0 flex-1 flex-col"><div className="flex items-start justify-between gap-3"><div><Link href={`/product/${item.product.slug}`} className="font-bold sm:text-lg">{item.product.name}</Link><p className="mt-1 text-xs text-white/40">{item.size} · {item.color}</p></div><button onClick={() => removeItem(item.id)} className="text-white/30 hover:text-red-400"><Trash2 size={17} /></button></div><div className="mt-auto flex items-end justify-between"><QuantitySelector value={item.quantity} onChange={(quantity) => updateQuantity(item.id, quantity)} /><p className="font-bold text-[var(--accent)]">{formatPrice(item.product.price * item.quantity)}</p></div></div></div>)}</div><aside className="h-fit rounded-[2rem] border border-white/8 bg-[#111113] p-6 lg:sticky lg:top-28"><h2 className="text-xl font-bold">Order summary</h2><div className="mt-6 space-y-3 border-b border-white/8 pb-5 text-sm"><div className="flex justify-between text-white/50"><span>Subtotal</span><span className="text-white">{formatPrice(subtotal)}</span></div><div className="flex justify-between text-white/50"><span>Delivery</span><span className="text-white">{delivery ? formatPrice(delivery) : "Free"}</span></div></div><div className="flex justify-between py-5 text-lg font-bold"><span>Total</span><span className="text-[var(--accent)]">{formatPrice(subtotal+delivery)}</span></div>{subtotal < 2500 && <p className="mb-5 rounded-xl bg-[var(--accent)]/8 p-3 text-xs leading-5 text-[var(--accent)]">Add {formatPrice(2500-subtotal)} more for free delivery.</p>}<Link href="/checkout" className="flex h-13 items-center justify-center gap-2 rounded-full bg-[var(--accent)] font-bold text-black">Proceed to checkout <ArrowRight size={17} /></Link></aside></div>;
+}

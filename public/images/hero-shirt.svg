@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100">
+<defs>
+ <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".7" numOctaves="3" seed="4"/><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .12 0"/></filter>
+ <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="28" stdDeviation="22" flood-opacity=".28"/></filter>
+ <linearGradient id="shine" x1="0" x2="1"><stop stop-color="#fff" stop-opacity=".12"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".15"/></linearGradient>
+</defs>
+<rect width="100%" height="100%" fill="#171719"/>
+
+<g transform="translate(0 30)" filter="url(#shadow)">
+<path d="M240 185 370 110h160l130 75 145 92-105 165-85-52v580H285V390l-85 52-105-165Z" fill="#18191b"/>
+<path d="M370 110q80 98 160 0" fill="none" stroke="#070708" stroke-width="32"/>
+<g opacity=".18" fill="#fff"><ellipse cx="430" cy="360" rx="230" ry="105"/><ellipse cx="510" cy="680" rx="260" ry="130"/><path d="M180 520q290-180 590 5-275 145-590-5Z"/></g>
+<path d="M285 390v580h330V390" fill="url(#shine)"/>
+<text x="450" y="510" text-anchor="middle" font-family="Arial Black" font-size="58" letter-spacing="8" fill="#ccff00">METALIX</text>
+<rect x="320" y="538" width="260" height="7" fill="#ccff00"/>
+<text x="450" y="585" text-anchor="middle" font-family="Arial" font-size="20" letter-spacing="11" fill="#fff">MADE STRONG</text>
+<text x="450" y="785" text-anchor="middle" font-family="Arial Black" font-size="25" fill="#fff" opacity=".18">PREMIUM / 240+ GSM</text>
+</g>
+<rect width="100%" height="100%" filter="url(#grain)" opacity=".35"/>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100">
+<defs>
+ <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".7" numOctaves="3" seed="4"/><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .12 0"/></filter>
+ <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="28" stdDeviation="22" flood-opacity=".28"/></filter>
+ <linearGradient id="shine" x1="0" x2="1"><stop stop-color="#fff" stop-opacity=".12"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".15"/></linearGradient>
+</defs>
+<rect width="100%" height="100%" fill="#bcb6aa"/>
+<rect width="900" height="1100" fill="#bcb6aa"/>
+<g transform="translate(70 70) rotate(-4 380 480)" filter="url(#shadow)">
+<path d="M180 170 300 100h160l120 70 140 90-95 155-85-50v530H220V365l-85 50-95-155Z" fill="#e3ddcf"/>
+<path d="M300 100q80 90 160 0" fill="none" stroke="#111" stroke-opacity=".5" stroke-width="28"/>
+<text x="380" y="470" text-anchor="middle" font-family="Arial Black" font-size="54" fill="#111111">MADE / STRONG</text>
+<text x="380" y="520" text-anchor="middle" font-family="Arial" font-size="16" fill="#111111" letter-spacing="11">ESSENTIALS</text>
+</g>
+<circle cx="760" cy="190" r="90" fill="none" stroke="#111111" stroke-width="2" opacity=".55"/>
+<circle cx="760" cy="190" r="50" fill="none" stroke="#111111" stroke-width="2" opacity=".55"/>
+<rect width="100%" height="100%" filter="url(#grain)" opacity=".35"/>
+</svg>
